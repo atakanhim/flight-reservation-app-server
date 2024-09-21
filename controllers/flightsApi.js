@@ -2,9 +2,6 @@
 import axios from 'axios'
 // Flights  API CONSTS
 const flight_api_url = "https://api.schiphol.nl/public-flights/flights";
-const app_key =  process.env.FLIGHT_APP_KEY; // API gizli anahtarı
-const app_id = process.env.FLIGHT_APP_ID;
-
 // parametreleri 
 export const getFlights= async (req, res) => {
   try {
@@ -21,8 +18,7 @@ export const getFlights= async (req, res) => {
       params: {
         scheduleDate: flightdate, // Uçuş tarihi
         flightDirection: 'D', // Giden uçuşlar (Departures)
-        origin: origin , // Kalkış noktası
-        destination: destination , // Varış noktası
+        
       },
     });
 
