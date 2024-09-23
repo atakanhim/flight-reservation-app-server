@@ -7,7 +7,7 @@ export const getFlights= async (req, res) => {
   try {
     let _flightDirection ='';
     let _route ='';
-    const { flightdate, arrival, departure, returnDate, tripType } = req.query;
+    const { flightDate, arrival, departure, returnDate, tripType } = req.query;
      if(departure=='AMS')
       {
         _route = arrival;
@@ -20,7 +20,8 @@ export const getFlights= async (req, res) => {
      }
      
 
-
+     console.log(req.query)
+     console.log(flightDate)
     const settingsWithoutDirection = {
       headers: {
         app_id : process.env.FLIGHT_APP_ID , // .env dosyasından al
@@ -29,7 +30,7 @@ export const getFlights= async (req, res) => {
         Accept: "application/json",
       },
       params: {
-        scheduleDate: flightdate, // Uçuş tarihi
+        scheduleDate: flightDate, // Uçuş tarihi
       },
     }
      const settingsWithDirection = {
@@ -40,7 +41,7 @@ export const getFlights= async (req, res) => {
         Accept: "application/json",
       },
       params: {
-        scheduleDate: flightdate, // Uçuş tarihi
+        scheduleDate: flightDate, // Uçuş tarihi
         flightDirection:_flightDirection,
         route:_route
       },
@@ -49,10 +50,10 @@ export const getFlights= async (req, res) => {
     // Gidiş uçuşunu sorgula (her iki seçenek için ortak)
     const outboundResponse = await axios.get(flight_api_url, settings);
 
-    // Yanıtlar için listeyi başlat
-    let flightResults = {
-      outbound: outboundResponse.data,
-    };
+    // // Yanıtlar için listeyi başlat
+    // let flightResults = {
+    //   outbound: outboundResponse.data,
+    // };
 
     // // Eğer gidiş-dönüş ise (round trip) dönüş uçuşunu da sorgula
     // if (tripType === 'roundTrip' && returnDate) {
