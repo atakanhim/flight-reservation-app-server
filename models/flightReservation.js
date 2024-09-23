@@ -6,41 +6,41 @@ const { Schema } = mongoose;
 const FlightReservationSchema = new Schema(
   {
     id: { type: String, default: uuidv4 }, // Unique flight ID
-    lastUpdatedAt: { type: Date, required: true }, // Using Date for time fields
-    actualLandingTime: { type: Date, required: true },
-    estimatedLandingTime: { type: Date, required: true },
-    expectedTimeOnBelt: { type: Date, required: true },
-    flightDirection: { type: String, required: true }, // "A" or "D"
-    flightName: { type: String, required: true },
-    flightNumber: { type: Number, required: true },
-    isOperationalFlight: { type: Boolean, required: true },
-    mainFlight: { type: String, required: true },
-    prefixIATA: { type: String, required: true },
-    prefixICAO: { type: String, required: true },
-    airlineCode: { type: Number, required: true },
-    serviceType: { type: String, required: true },
-    terminal: { type: Number, required: true },
-    schemaVersion: { type: String, required: true },
+    lastUpdatedAt: { type: Date, required: false }, // Using Date for time fields
+    actualLandingTime: { type: Date, required: false },
+    estimatedLandingTime: { type: Date , required: false,  },
+    expectedTimeOnBelt: { type: Date, required: false },
+    flightDirection: { type: String, required: false }, // "A" or "D"
+    flightName: { type: String, required: false },
+    flightNumber: { type: Number, required: false },
+    isOperationalFlight: { type: Boolean, required: false },
+    mainFlight: { type: String, required: false },
+    prefixIATA: { type: String, required: false },
+    prefixICAO: { type: String, required: false },
+    airlineCode: { type: Number, required: false },
+    serviceType: { type: String, required: false },
+    terminal: { type: Number, required: false },
+    schemaVersion: { type: String, required: false },
 
     // Nested documents for objects like aircraftType, baggageClaim, and publicFlightState
     aircraftType: {
-      iataMain: { type: String, required: true },
-      iataSub: { type: String, required: true },
+      iataMain: { type: String, required: false },
+      iataSub: { type: String, required: false },
     },
     baggageClaim: {
-      belts: [{ type: String, required: true }], // Array of belts
+      belts: [{ type: String, required: false }], // Array of belts
     },
     publicFlightState: {
-      flightStates: [{ type: String, required: true }],
+      flightStates: [{ type: String, required: false }],
     },
     route: {
-      destinations: [{ type: String, required: true }], // Array of destinations
-      eu: { type: String, required: true }, // "Y" or "N"
-      visa: { type: Boolean, required: true },
+      destinations: [{ type: String, required: false }], // Array of destinations
+      eu: { type: String, required: false }, // "Y" or "N"
+      visa: { type: Boolean, required: false },
     },
-    scheduleDateTime: { type: Date, required: true },
-    scheduleDate: { type: String, required: true },
-    scheduleTime: { type: String, required: true },
+    scheduleDateTime: { type: Date, required: false },
+    scheduleDate: { type: String, required: false },
+    scheduleTime: { type: String, required: false },
   },
   { timestamps: true } // Adds createdAt and updatedAt fields automatically
 );

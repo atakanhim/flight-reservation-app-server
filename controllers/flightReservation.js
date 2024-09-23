@@ -18,18 +18,13 @@ export const getFlightReservationFromDb = async (req, res) => {
   }
 };
 export const createFlightReservationFromDb = async (req, res) => {
-
-  const newFlightReservation = new flightReservation({
-  
-  });
-
-  console.log("this is new FlightReservation : \n " + newFlightReservation);
+  const flightData = req.body;
+  const newFlightReservation = new flightReservation(flightData);
   try {
     await newFlightReservation.save();
     res.status(201).json(newFlightReservation);
   } catch (error) {
     res.status(409).json({ message: error.message });
-    console.log(error);
   }
 };
 export const clearAllFlightReservationsFromDb = async (req, res) => {
@@ -41,14 +36,17 @@ export const clearAllFlightReservationsFromDb = async (req, res) => {
   }
 };
 export const deleteFlightReservationFromDb = async (req, res) => {
+  
   const id = req.params.id;
+
   try {
+
+
     await flightReservation.findByIdAndDelete(id);
-    res.status(200).json({ message: "FlightReservation deleted " + id });
+    res.status(200).json({ message: "Uçuş Rezervasyonunuz silindi." });
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });
   }
 };
-
 
